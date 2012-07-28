@@ -1,6 +1,16 @@
+downloads/
+
+prj/android/jni/SDL/
+
 *bin
 *obj
 *suo
 *.user
 *.tmp
-downloads/
+
+*.project
+*.classpath
+*.settings
+prj/android/gen/
+prj/android/libs/
+prj/android/local.properties

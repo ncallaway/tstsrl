@@ -1,0 +1,7 @@
+In this folder, the following libraries need to be downloaded:
+
+* SDL
+
+--
+
+SDL: hg clone http://hg.libsdl.org/SDL
