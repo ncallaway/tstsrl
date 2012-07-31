@@ -1,7 +1,7 @@
 downloads/
 project/
 
-prj/android/jni/SDL/
+platform_specific/android/jni/SDL/
 
 *bin
 *obj
@@ -12,6 +12,6 @@ prj/android/jni/SDL/
 *.project
 *.classpath
 *.settings
-prj/android/gen/
-prj/android/libs/
-prj/android/local.properties
+platform_specific/android/gen/
+platform_specific/android/libs/
+platform_specific/android/local.properties

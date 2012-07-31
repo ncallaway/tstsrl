@@ -13,8 +13,9 @@ int main( int argc, char* args[] )
 
     renderer = SDL_CreateRenderer(window, -1, 0);
 
-    // Draw red
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    // Draw blue 
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
