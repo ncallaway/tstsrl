@@ -13,7 +13,9 @@ There is a convenience script that automates the following steps called doit. To
 
 Examples:
     ./doit l run # Build and run the linux version
+
     ./doit a run # Build and run the android version
+
     ./doit w run # Build and run the windows version
 
 ### Linux ###
