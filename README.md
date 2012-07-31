@@ -11,6 +11,8 @@ This list will be fleshed out as we go. Currently:
 
 There is a convenience script that automates the following steps called doit. To perform a build for a given platform simply run `./doit [platform]`, or `./doit [platform] run`.
 
+For Windows builds, vcvars32.bat must be in your path.
+
 Examples:
     ./doit l run # Build and run the linux version
 
@@ -25,7 +27,7 @@ Examples:
     make
 
 Run with:
-    bin/Linux/tstsrl
+    bin/linux/tstsrl
 
 ### Android ###
     mkdir project
@@ -40,4 +42,12 @@ Run with:
     adb shell am start -n org.libsdl.app/org.libsdl.app.SDLActivity
 
 ### Windows ###
-No instructions yet. Windows is not running from cmake or SDL2 yet.
+	mkdir project
+	cd project
+	vcvars32 x86 # 64 bit builds not yet supported. Need to do a x64 build of SDL2.
+	cmake -G "NMake Makefiles" ..
+	nmake
+	
+Run with:
+	bin/windows/tstsrl.exe
+	

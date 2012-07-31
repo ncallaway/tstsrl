@@ -48,3 +48,16 @@ if target_os == "android"
         system 'adb shell am start -n org.libsdl.app/org.libsdl.app.SDLActivity'
     end
 end
+
+if target_os == "windows"
+    puts "Beginning windows build...\n"
+    system 'vcvars32 x86 & cmake -G "NMake Makefiles" ..'
+    system 'vcvars32 x86 & nmake'
+    
+    if run
+        Dir.chdir "../bin/windows"
+        exec 'tstsrl.exe'
+    end
+end
+
+
