@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
 target_os = "linux"
 run = false
 
