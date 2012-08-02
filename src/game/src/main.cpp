@@ -1,8 +1,14 @@
 #include "SDL.h"
 
 #include "Looper.h"
+int prev_render_draw_color = 0;
 int render_draw_color = 0;
 SDL_Renderer* renderer = NULL;
+
+bool capture() {
+    prev_render_draw_color = render_draw_color;
+    return false;
+}
 
 bool update(double t, double dt) {
     render_draw_color += 10;
@@ -16,7 +22,8 @@ bool update(double t, double dt) {
 }
 
 bool render(double alpha) {
-    SDL_SetRenderDrawColor(renderer, render_draw_color, render_draw_color, render_draw_color, 255);
+    int c = (int)((double)render_draw_color*alpha + (double)prev_render_draw_color*(1.0-alpha));
+    SDL_SetRenderDrawColor(renderer, c, c, c, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
     return false;
@@ -34,7 +41,7 @@ int main( int argc, char* args[] )
     renderer = SDL_CreateRenderer(window, -1, 0);
 
     LooperConfiguration configuration;
-    configuration.capture_function = NULL;
+    configuration.capture_function = &capture;
     configuration.update_function = &update;
     configuration.render_function = &render;
     configuration.update_dt = .1;
