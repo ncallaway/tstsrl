@@ -1,8 +1,11 @@
 set( SOURCES
      src/main.cpp
 )
+set( INCLUDE_DIRS
+     "../engine/include"
+   )
 
-include_directories("../engine/include")
+include_directories(${INCLUDE_DIRS})
 
 set(TARGET "game")
 
@@ -13,9 +16,15 @@ if (${TARGET_OS} MATCHES "android")
     set(SRC_STR "${SRC_STR} \\\n  \$(SRC_PATH)/${SRC}")
   endforeach(SRC)
 
+  set (INCLUDE_STR "")
+  foreach(DIR ${INCLUDE_DIRS})
+    set(INCLUDE_STR "${INCLUDE_STR}  \\\n  ${CMAKE_CURRENT_SOURCE_DIR}/${DIR}")
+  endforeach(DIR)
+
+
   configure_file(
-    "${PROJECT_SOURCE_DIR}/platform_specific/android/jni/src/Android.mk.in"
-    "${PROJECT_SOURCE_DIR}/platform_specific/android/jni/src/Android.mk"
+    "${PROJECT_SOURCE_DIR}/platform_specific/android/jni/src/game/Android.mk.in"
+    "${PROJECT_SOURCE_DIR}/platform_specific/android/jni/src/game/Android.mk"
   )
 
   return()

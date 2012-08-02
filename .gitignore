@@ -2,6 +2,8 @@ downloads/
 project/
 
 platform_specific/android/jni/SDL/
+platform_specific/android/jni/src/game/Android.mk
+platform_specific/android/jni/src/engine/Android.mk
 
 *bin
 *obj

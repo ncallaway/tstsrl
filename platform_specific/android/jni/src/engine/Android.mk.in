@@ -1,0 +1,20 @@
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := engine 
+
+SDL_PATH := ../../SDL
+
+SRC_PATH := ../../../../../src/engine
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/$(SDL_PATH)/include@INCLUDE_STR@
+
+# Add your application source files here...
+LOCAL_SRC_FILES := @SRC_STR@
+
+LOCAL_SHARED_LIBRARIES := SDL2
+
+LOCAL_LDLIBS := -lGLESv1_CM -llog
+
+include $(BUILD_STATIC_LIBRARY)
