@@ -14,6 +14,7 @@ There is a convenience script that automates the following steps called doit. To
 For Windows builds, vcvars32.bat must be in your path.
 
 Examples:
+
     ./doit l run # Build and run the linux version
 
     ./doit a run # Build and run the android version
@@ -27,6 +28,7 @@ Examples:
     make
 
 Run with:
+
     bin/linux/tstsrl
 
 ### Android ###
@@ -38,7 +40,9 @@ Run with:
     ant debug
 
 Run with:
+
     adb install platform_specific/android/bin/SDLActivity-debug.apk
+
     adb shell am start -n org.libsdl.app/org.libsdl.app.SDLActivity
 
 ### Windows ###
@@ -49,5 +53,6 @@ Run with:
 	nmake
 	
 Run with:
+
 	bin/windows/tstsrl.exe
 	
