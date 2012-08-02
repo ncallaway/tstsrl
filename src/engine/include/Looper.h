@@ -3,14 +3,28 @@
 
 #include "SDL.h"
 
+struct LooperConfiguration {
+    bool (*capture_function)();
+    bool (*update_function)(double t, double dt);
+    bool (*render_function)(double alpha);
+
+    double update_dt;
+    double max_frame_time;
+};
+
 class Looper {
 
 public:
 
-   void loop(SDL_Renderer* pRenderer); 
+    Looper();
+
+    void set_configuration(LooperConfiguration configuration);
+
+    void loop(); 
 
 private:
 
+    LooperConfiguration m_configuration;
 };
 
 #endif // LOOPER_H
