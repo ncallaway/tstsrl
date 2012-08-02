@@ -38,10 +38,10 @@ add_executable (
 
 if (${TARGET_OS} MATCHES "windows")
 
-    target_link_libraries(${TARGET} SDL SDLmain)
+    target_link_libraries(${TARGET} SDL SDLmain engine)
     add_custom_command(TARGET ${TARGET} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/platform_specific/windows/sdl/lib/SDL.dll"
-        $<TARGET_FILE_DIR:tstsrl>)
+        $<TARGET_FILE_DIR:${TARGET}>)
         
 else (${TARGET_OS} MATCHES "windows")
     set_target_properties(${TARGET} PROPERTIES COMPILE_FLAGS "${SDL_CFLAGS}" LINK_FLAGS "${SDL_LFLAGS}")
