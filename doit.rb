@@ -1,6 +1,8 @@
 target_os = "linux"
 run = false
 
+target = "game"
+
 if ARGV.length > 0
     if "linux".start_with?(ARGV[0])
         target_os = "linux"
@@ -24,23 +26,29 @@ end
 Dir.mkdir "project" unless File.directory? "project"
 Dir.chdir "project"
 
+def cmd(command)
+    if not system command
+        abort("Build process failed on command: #{command}")
+    end
+end
+
 if target_os == "linux"
     puts "Beginning linux build...\n"
-    system 'cmake ..'
-    system 'make'
+    cmd 'cmake ..'
+    cmd 'make'
 
     if run
-        Dir.chdir "../bin/Linux"
-        exec './tstsrl'
+        Dir.chdir "../bin/linux"
+        exec "./#{target}"
     end
 end
 
 if target_os == "android"
     puts "Beginning android build...\n"
-    system 'cmake ..'
+    cmd 'cmake ..'
     Dir.chdir "../platform_specific/android"
-    system 'ndk-build'
-    system 'ant debug'
+    cmd 'ndk-build'
+    cmd 'ant debug'
     system 'adb install -r bin/SDLActivity-debug.apk'
 
     if run
@@ -50,12 +58,12 @@ end
 
 if target_os == "windows"
     puts "Beginning windows build...\n"
-    system 'vcvars32 x86 & cmake -G "NMake Makefiles" ..'
-    system 'vcvars32 x86 & nmake'
+    cmd 'vcvars32 x86 & cmake -G "NMake Makefiles" ..'
+    cmd 'vcvars32 x86 & nmake'
     
     if run
         Dir.chdir "../bin/windows"
-        exec 'tstsrl.exe'
+        exec "#{target}.exe"
     end
 end
 

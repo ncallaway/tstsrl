@@ -1,5 +1,7 @@
 #include "SDL.h"
 
+#include "Looper.h"
+
 int main( int argc, char* args[] )
 {
     SDL_Window* window;
@@ -13,12 +15,15 @@ int main( int argc, char* args[] )
     renderer = SDL_CreateRenderer(window, -1, 0);
 
     // Draw green 
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
 
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
+    Looper* looper = new Looper();
+    looper->loop(renderer);
 
-    SDL_Delay(5000);
+//    SDL_RenderClear(renderer);
+//    SDL_RenderPresent(renderer);
+//    SDL_Delay(5000);
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     
