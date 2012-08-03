@@ -4,6 +4,7 @@
 #include "SDL.h"
 
 struct LooperConfiguration {
+    bool (*event_function)(SDL_Event*);
     bool (*capture_function)();
     bool (*update_function)(double t, double dt);
     bool (*render_function)(double alpha);

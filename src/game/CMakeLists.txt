@@ -1,8 +1,11 @@
 set( SOURCES
      src/main.cpp
+     src/MainMenuState.cpp
 )
+
 set( INCLUDE_DIRS
      "../engine/include"
+     "include"
    )
 
 include_directories(${INCLUDE_DIRS})
