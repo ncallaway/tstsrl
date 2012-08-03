@@ -1,6 +1,6 @@
 TSTSRL will be an open source (like Linux) cross-platform (android/windows/linux/mac) twin-stick (like Geometry Wars) tactical shooter (like Rainbox Six) rogue-like (like Rogue)
 
-Current TSTSRL is only an SDL window that only appears on windows, linux, and android. So there's a ways to go...
+Current TSTSRL is only an SDL window that only appears on windows, linux, and android (at least it's open source!). So there's a ways to go...
 
 ## Build Dependencies ##
 This list will be fleshed out as we go. Currently:
