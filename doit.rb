@@ -47,6 +47,7 @@ if target_os == "android"
     puts "Beginning android build...\n"
     cmd 'cmake ..'
     Dir.chdir "../platform_specific/android"
+    cmd 'android update project -p .'
     cmd 'ndk-build'
     cmd 'ant debug'
     system 'adb install -r bin/SDLActivity-debug.apk'
