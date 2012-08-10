@@ -8,8 +8,15 @@
 class IRenderInfo;
 class IStateChanger;
 
+/**
+  The state responsible for running the core game.
+*/
 class GameState : public State {
 public:
+    /**
+      \param [in] state_changer The IStateChanger that can change between various states.
+      \param [in] renderer The IRenderInfo that contains the data necessary to render the menu.
+    */
     GameState(IStateChanger* state_changer, IRenderInfo* renderer);
 
     virtual void start();

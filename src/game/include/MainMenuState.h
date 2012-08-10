@@ -8,8 +8,15 @@
 class IStateChanger;
 class IRenderInfo;
 
+/**
+  The state responsible for displaying the main menu.
+*/
 class MainMenuState : public State {
 public:
+    /**
+      \param [in] state_changer The IStateChanger that can change between various states.
+      \param [in] renderer The IRenderInfo that contains the data necessary to render the menu.
+    */
     MainMenuState(IStateChanger* state_changer, IRenderInfo* renderer);
 
     virtual void start();

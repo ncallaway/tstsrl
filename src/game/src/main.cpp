@@ -1,3 +1,10 @@
+/**
+  \file main.cpp The main entry point for the application. Currently this file
+  is responsible for setting up the SDL framework as well as initializing the states.
+  
+  In the near future, this should ship the work off to a startup manager, which will do all
+  necessary application startup work.
+*/
 #include "SDL.h"
 
 #include "StateManager.h"
@@ -10,6 +17,13 @@
 #include "GameState.h"
 #include "Renderer.h"
 
+/**
+  main() function of the application.
+
+  \param argc the count of arguments in the args array.
+  \param args the array of command line arguments.
+  \return the exit code. 0 on success, nonzero on failure.
+*/
 int main( int argc, char* args[] )
 {
     SDL_Window* p_window;

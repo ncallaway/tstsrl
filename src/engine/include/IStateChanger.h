@@ -13,7 +13,7 @@ public:
       on your state system. The default StateManager, for example, requires you to register states ahead of time, before
       they can be used.
 
-      It is strongly encouraged that you use an enum instead of #define'd ints to set the state values.
+      It is strongly encouraged that you use an enum instead of define'd ints to set the state values.
     
       \param state_name the value of the state to changed to.
     */

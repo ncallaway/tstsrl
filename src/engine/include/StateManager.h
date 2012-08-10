@@ -24,7 +24,7 @@ public:
       set_next_state() using the state name. Calling set_next_state() before registering the state
       will generate an exception.
 
-      It is strongly encourage to use an enum instead of #define'd ints to define the state names.
+      It is strongly encourage to use an enum instead of define'd ints to define the state names.
       
       \param state_name The name of the state. If this is an already registered State, the old State pointer
       will be forgotten.
