@@ -37,8 +37,10 @@ if target_os == "linux"
     cmd 'cmake ..'
     cmd 'make'
 
+    Dir.chdir "../bin/linux"
+    cmd './engine_ut'
+
     if run
-        Dir.chdir "../bin/linux"
         exec "./#{target}"
     end
 end

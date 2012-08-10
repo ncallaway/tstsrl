@@ -24,7 +24,7 @@ void Looper::loop() {
     while ( !quit ) {
         quit |= !is_configuration_valid();
 
-        m_configuration.loop_moderator->iterate();
+        quit |= m_configuration.loop_moderator->iterate();
         quit |= !is_configuration_valid();
 
         // Capture dt for this iteration. It should be constant for a full iteration of the loop.

@@ -5,6 +5,7 @@ Current TSTSRL is only an SDL window that only appears on windows, linux, and an
 ## Build Dependencies ##
 This list will be fleshed out as we go. Currently:
 * SDL2
+* Google C++ Mocking Framework. This must be placed in test/gmock (see the README in the test folder for more information)
 * Platform specific build tools (gcc, make, ant, etc depending on platform)
 
 ## Build Instructions ##
