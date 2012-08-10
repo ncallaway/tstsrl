@@ -1,6 +1,8 @@
 set( SOURCES
      src/main.cpp
      src/MainMenuState.cpp
+     src/ControllerSelectState.cpp
+     src/GameState.cpp
 )
 
 set( INCLUDE_DIRS

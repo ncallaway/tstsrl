@@ -3,9 +3,7 @@
 #include <stdio.h>
 
 Looper::Looper() {
-    m_configuration.capture_function = NULL;
-    m_configuration.update_function = NULL;
-    m_configuration.render_function = NULL;
+    m_configuration.loop_moderator = NULL;
     m_configuration.update_dt = 0;
     m_configuration.max_frame_time = 0;
 }
@@ -17,12 +15,6 @@ void Looper::set_configuration(LooperConfiguration configuration) {
 void Looper::loop() {
     bool quit = false;
 
-    if (m_configuration.update_function == NULL ||
-        m_configuration.update_dt == 0 ||
-        m_configuration.max_frame_time == 0) {
-
-        quit = true;
-    }
 
     double t = 0;
     double accumulator = 0.0;
@@ -30,6 +22,10 @@ void Looper::loop() {
     SDL_Event event;
 
     while ( !quit ) {
+        quit |= !is_configuration_valid();
+
+        m_configuration.loop_moderator->iterate();
+        quit |= !is_configuration_valid();
 
         // Capture dt for this iteration. It should be constant for a full iteration of the loop.
         double dt = m_configuration.update_dt;
@@ -47,21 +43,17 @@ void Looper::loop() {
 
         // Handle all events.
         while (SDL_PollEvent(&event)) {
-            if (m_configuration.event_function != NULL) {
-                quit |= m_configuration.event_function(&event);
-            }
+            quit |= m_configuration.loop_moderator->event(&event);
+            quit |= !is_configuration_valid();
         }
 
         // Perform as many updates as we can!
         while (accumulator >= m_configuration.update_dt && !quit) {
+            quit |= m_configuration.loop_moderator->capture();
+            quit |= !is_configuration_valid();
 
-            if (m_configuration.capture_function != NULL) {
-                quit |= m_configuration.capture_function();
-            }
-
-            if (m_configuration.update_function != NULL) {
-                quit |= m_configuration.update_function(t, dt);
-            }
+            quit |= m_configuration.loop_moderator->update(t, dt);
+            quit |= !is_configuration_valid();
 
             t += dt;
             accumulator -= dt;
@@ -70,8 +62,18 @@ void Looper::loop() {
         // And render.
         const double alpha = accumulator / dt;
 
-        if (m_configuration.render_function != NULL && !quit) {
-            quit |= m_configuration.render_function(alpha);
-        }
+        quit |= m_configuration.loop_moderator->render(alpha);
+        quit |= !is_configuration_valid();
     }
+}
+
+bool Looper::is_configuration_valid() {
+    if (m_configuration.loop_moderator == NULL ||
+        m_configuration.update_dt == 0 ||
+        m_configuration.max_frame_time == 0) {
+
+        return false;
+    }
+
+    return true;
 }

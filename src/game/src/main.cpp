@@ -1,48 +1,37 @@
 #include "SDL.h"
 
+#include "StateManager.h"
 #include "State.h"
 #include "Looper.h"
 
+#include "States.h"
 #include "MainMenuState.h"
-
-State* pState;
-
-bool event(SDL_Event* event) {
-    return pState->event(event);
-}
-
-bool capture() {
-    return pState->capture();
-}
-
-bool update(double t, double dt) {
-    return pState->update(t, dt);
-}
-
-bool render(double alpha) {
-    return pState->render(alpha);
-}
+#include "ControllerSelectState.h"
+#include "GameState.h"
+#include "Renderer.h"
 
 int main( int argc, char* args[] )
 {
-    SDL_Window* pWindow;
-    SDL_Renderer* pRenderer;
+    SDL_Window* p_window;
+    SDL_Renderer* p_renderer;
+    StateManager* p_state_manager;
 
     //Start SDL
     SDL_Init( SDL_INIT_EVERYTHING );
 
-    pWindow = SDL_CreateWindow("A window", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+    p_window = SDL_CreateWindow("A window", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+    p_renderer = SDL_CreateRenderer(p_window, -1, 0);
 
-    pRenderer = SDL_CreateRenderer(pWindow, -1, 0);
+    Renderer* renderer = new Renderer(p_renderer);
 
-    pState = new MainMenuState(pRenderer);
-    pState->start();
+    p_state_manager = new StateManager();
+    p_state_manager->register_state(MAIN_MENU_STATE, new MainMenuState(p_state_manager, renderer));
+    p_state_manager->register_state(CONTROLLER_SELECT_STATE, new ControllerSelectState(p_state_manager, renderer)); 
+    p_state_manager->register_state(GAME_STATE, new GameState(p_state_manager, renderer)); 
+    p_state_manager->set_next_state(MAIN_MENU_STATE);
 
     LooperConfiguration configuration;
-    configuration.event_function = &event;
-    configuration.capture_function = &capture;
-    configuration.update_function = &update;
-    configuration.render_function = &render;
+    configuration.loop_moderator = p_state_manager;
     configuration.update_dt = .1;
     configuration.max_frame_time = .25;
 
@@ -50,8 +39,8 @@ int main( int argc, char* args[] )
     looper->set_configuration(configuration);
     looper->loop();
 
-    SDL_DestroyRenderer(pRenderer);
-    SDL_DestroyWindow(pWindow);
+    SDL_DestroyRenderer(p_renderer);
+    SDL_DestroyWindow(p_window);
     
     // Quit SDL
     SDL_Quit();

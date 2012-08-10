@@ -3,11 +3,19 @@
 
 #include "SDL.h"
 
+class ILoopModerator {
+public:
+    virtual ~ILoopModerator() {}
+
+    virtual bool iterate() = 0;
+    virtual bool event(SDL_Event* event) = 0;
+    virtual bool capture() = 0;
+    virtual bool update(double d, double dt) = 0;
+    virtual bool render(double alpha) = 0;
+};
+
 struct LooperConfiguration {
-    bool (*event_function)(SDL_Event*);
-    bool (*capture_function)();
-    bool (*update_function)(double t, double dt);
-    bool (*render_function)(double alpha);
+    ILoopModerator* loop_moderator;
 
     double update_dt;
     double max_frame_time;
@@ -24,6 +32,8 @@ public:
     void loop(); 
 
 private:
+   
+    bool is_configuration_valid();
 
     LooperConfiguration m_configuration;
 };

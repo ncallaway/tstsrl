@@ -1,19 +1,19 @@
-#ifndef MAIN_MENU_STATE_H
-#define MAIN_MENU_STATE_H
+#ifndef GAME_STATE_H 
+#define GAME_STATE_H 
 
 #include "SDL.h"
 
 #include "State.h" // Required for subclass of State
 
-class IStateChanger;
 class IRenderer;
+class IStateChanger;
 
-class MainMenuState : public State {
+class GameState : public State {
 public:
-    MainMenuState(IStateChanger* state_changer, IRenderer* renderer);
+    GameState(IStateChanger* state_changer, IRenderer* renderer);
 
     virtual void start();
-    
+
     virtual bool event(SDL_Event* event);
     virtual bool capture();
     virtual bool update(double t, double dt);
@@ -27,5 +27,4 @@ private:
     int m_previous_color_value;
     int m_color_value;
 };
-
-#endif // MAIN_MENU_STATE_H
+#endif // GAME_STATE_H
