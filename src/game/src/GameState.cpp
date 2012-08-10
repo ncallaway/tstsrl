@@ -1,11 +1,11 @@
 #include "GameState.h"
 
-#include "IRenderer.h"
+#include "IRenderInfo.h"
 #include "IStateChanger.h"
 
 #include "States.h"
 
-GameState::GameState(IStateChanger* state_changer, IRenderer* renderer) {
+GameState::GameState(IStateChanger* state_changer, IRenderInfo* renderer) {
     mp_state_changer = state_changer;
     mp_renderer = renderer;
 }

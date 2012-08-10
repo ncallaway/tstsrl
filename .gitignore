@@ -6,6 +6,7 @@ platform_specific/android/jni/src/game/Android.mk
 platform_specific/android/jni/src/engine/Android.mk
 
 *bin
+*doc
 *obj
 *suo
 *.user

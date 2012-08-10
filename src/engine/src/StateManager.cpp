@@ -8,8 +8,8 @@ StateManager::StateManager() {
     mp_next_state = NULL;
 }
 
-void StateManager::register_state(int state_name, State* p_state) {
-    m_states[state_name] = p_state;
+void StateManager::register_state(int state_name, State* state) {
+    m_states[state_name] = state;
 }
 
 void StateManager::release_states() {

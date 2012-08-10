@@ -6,11 +6,11 @@
 #include "State.h" // Required for subclass of State
 
 class IStateChanger;
-class IRenderer;
+class IRenderInfo;
 
 class MainMenuState : public State {
 public:
-    MainMenuState(IStateChanger* state_changer, IRenderer* renderer);
+    MainMenuState(IStateChanger* state_changer, IRenderInfo* renderer);
 
     virtual void start();
     
@@ -20,7 +20,7 @@ public:
     virtual bool render(double alpha);
 
 private:
-    IRenderer* mp_renderer; 
+    IRenderInfo* mp_renderer; 
     IStateChanger* mp_state_changer;
 
     bool m_going_up;

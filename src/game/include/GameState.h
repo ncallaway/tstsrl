@@ -5,12 +5,12 @@
 
 #include "State.h" // Required for subclass of State
 
-class IRenderer;
+class IRenderInfo;
 class IStateChanger;
 
 class GameState : public State {
 public:
-    GameState(IStateChanger* state_changer, IRenderer* renderer);
+    GameState(IStateChanger* state_changer, IRenderInfo* renderer);
 
     virtual void start();
 
@@ -20,7 +20,7 @@ public:
     virtual bool render(double alpha);
 
 private:
-    IRenderer* mp_renderer; 
+    IRenderInfo* mp_renderer; 
     IStateChanger* mp_state_changer;
 
     bool m_going_up;

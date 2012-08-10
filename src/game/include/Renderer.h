@@ -1,11 +1,11 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "IRenderer.h"
+#include "IRenderInfo.h"
 
 class SDL_Renderer;
 
-class Renderer : public IRenderer {
+class Renderer : public IRenderInfo {
 public:
     Renderer(SDL_Renderer* sdl_renderer) {
         mp_sdl_renderer = sdl_renderer;
