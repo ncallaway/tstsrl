@@ -20,7 +20,7 @@ void StateManager::set_next_state(int state_name) {
     State* next_state = get_registered_state(state_name);
 
     if (next_state == NULL) {
-        throw new EngineException("Attempted to change to an unregistered state.");
+        throw EngineException("Attempted to change to an unregistered state.");
     }
 
     mp_next_state = next_state;
@@ -60,9 +60,9 @@ State* StateManager::get_registered_state(int state_name) {
     std::map<int, State*>::iterator it;
     it = m_states.find(state_name);
 
-//    if (it != m_states.end) {
-//        return NULL;
-//    }
+    if (it == m_states.end()) {
+        return NULL;
+    }
 
     return it->second;
 }

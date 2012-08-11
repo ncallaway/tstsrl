@@ -4,14 +4,16 @@
 #include "MockLoopModerator.h"
 #include "Looper.h"
 
+using ::testing::NiceMock;
 using ::testing::Return;
 using ::testing::InSequence;
 using ::testing::_;
 using ::testing::AtLeast;
+using ::testing::Test;
 
-class LooperTest : public testing::Test {
+class LooperTest : public Test {
 public:
-    MockLoopModerator m_mock;
+    NiceMock<MockLoopModerator> m_mock;
     LooperConfiguration m_config;
     Looper* mp_looper;
 
@@ -25,6 +27,7 @@ public:
     }
     
     virtual void TearDown() {
+        delete mp_looper;
     }
 };
 

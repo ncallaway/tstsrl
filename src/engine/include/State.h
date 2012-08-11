@@ -1,6 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 
+union SDL_Event;
+
 /**
   The State class defines a game state that controls the game loop. Examples of States might be:
 
