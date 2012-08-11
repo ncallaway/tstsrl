@@ -20,7 +20,11 @@ void StateManager::set_next_state(int state_name) {
     State* next_state = get_registered_state(state_name);
 
     if (next_state == NULL) {
+#ifdef ANDROID
+        exit(1);
+#else // ANDROID
         throw EngineException("Attempted to change to an unregistered state.");
+#endif // ANDROID
     }
 
     mp_next_state = next_state;

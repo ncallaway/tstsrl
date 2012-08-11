@@ -54,7 +54,7 @@ int main( int argc, char* args[] )
 
     Looper* looper = new Looper();
     looper->set_configuration(configuration);
-    looper->loop();
+    looper->loop(); 
 
     SDL_DestroyRenderer(p_renderer);
     SDL_DestroyWindow(p_window);

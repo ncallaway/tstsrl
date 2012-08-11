@@ -50,6 +50,8 @@ if target_os == "android"
     cmd 'cmake ..'
     Dir.chdir "../platform_specific/android"
     cmd 'android update project -p .'
+    cmd 'mkdir -p assets/assets'
+    cmd 'cp -r ../../assets/fonts assets/assets/fonts'
     cmd 'ndk-build'
     cmd 'ant debug'
     system 'adb install -r bin/SDLActivity-debug.apk'

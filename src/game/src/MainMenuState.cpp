@@ -15,7 +15,7 @@ MainMenuState::MainMenuState(IStateChanger* state_changer, IRenderInfo* renderer
 
 void MainMenuState::start() {
     if (mp_selected_font == NULL) {
-        mp_selected_font = TTF_OpenFont("assets/quicksand_book.ttf", 24);
+        mp_selected_font = TTF_OpenFont("assets/fonts/quicksand_book.ttf", 24);
     }
 
     SDL_Color font_color = {155, 155, 255};
