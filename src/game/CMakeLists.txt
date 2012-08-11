@@ -43,9 +43,18 @@ add_executable (
 
 if (${TARGET_OS} MATCHES "windows")
 
-    target_link_libraries(${TARGET} SDL SDLmain engine)
+    target_link_libraries(${TARGET} SDL SDL2_ttf SDLmain engine)
     add_custom_command(TARGET ${TARGET} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/platform_specific/windows/sdl/lib/SDL.dll"
+        $<TARGET_FILE_DIR:${TARGET}>)
+    add_custom_command(TARGET ${TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/platform_specific/windows/sdl/lib/SDL2_ttf.dll"
+        $<TARGET_FILE_DIR:${TARGET}>)
+    add_custom_command(TARGET ${TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/platform_specific/windows/sdl/lib/libfreetype-6.dll"
+        $<TARGET_FILE_DIR:${TARGET}>)
+    add_custom_command(TARGET ${TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/platform_specific/windows/sdl/lib/zlib1.dll"
         $<TARGET_FILE_DIR:${TARGET}>)
         
 else (${TARGET_OS} MATCHES "windows")
