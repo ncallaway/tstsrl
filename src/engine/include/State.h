@@ -33,6 +33,7 @@ public:
       to its game loop functions below.
      */
     virtual void start() {};
+
     /**
       Called when the state is about to stop being active. The game will no longer receive game loop calls (and can
       release any resources it needs for the game loop).

@@ -11,9 +11,21 @@ MainMenuState::MainMenuState(IStateChanger* state_changer, IRenderInfo* renderer
 }
 
 void MainMenuState::start() {
-    m_going_up = true;
-    m_previous_color_value = 0;
-    m_color_value = 0;
+    if (mp_selected_font == NULL) {
+        mp_selected_font = TTF_OpenFont("assets/quicksand_book.ttf", 24);
+    }
+
+    SDL_Color font_color = {155, 155, 255};
+    SDL_Color bg_color = {255, 255, 255};
+
+    SDL_Surface* tmp_surface = TTF_RenderUTF8_Shaded(mp_selected_font, "Twin-Stick Tactical-Shooter Rogue-Like", font_color, bg_color);
+    SDL_Renderer* renderer = mp_renderer->get_sdl_renderer();
+    mp_title = SDL_CreateTextureFromSurface(renderer, tmp_surface);
+    SDL_FreeSurface(tmp_surface);
+}
+
+void MainMenuState::stop() {
+    SDL_DestroyTexture(mp_title);
 }
 
 bool MainMenuState::event(SDL_Event* event) {
@@ -31,32 +43,29 @@ bool MainMenuState::event(SDL_Event* event) {
 }
 
 bool MainMenuState::capture() {
-    m_previous_color_value = m_color_value;
     return false;
 }
 
 bool MainMenuState::update(double t, double dt) {
-    m_color_value += m_going_up ? 10 : -10;
-
-    if (m_color_value > 255) {
-        m_color_value = 255;
-        m_going_up = false;
-    } else if (m_color_value < 0) {
-        m_color_value = 0;
-        m_going_up = true;
-    }
-
     return false;
 }
 
 bool MainMenuState::render(double alpha) {
 
-    int c = (int)((double)m_color_value*alpha + (double)m_previous_color_value*(1.0-alpha));
-
     SDL_Renderer* p_sdl_renderer = mp_renderer->get_sdl_renderer();
 
-    SDL_SetRenderDrawColor(p_sdl_renderer, c, c, c, 255);
+    SDL_SetRenderDrawColor(p_sdl_renderer, 255, 255, 255, 255);
     SDL_RenderClear(p_sdl_renderer);
+
+    Uint32 format;
+    int access, w, h;
+
+    SDL_QueryTexture(mp_title, &format, &access, &w, &h);
+    SDL_Rect src = {0, 0, w, h};
+    SDL_Rect dst = {100, 10, w, h};
+
+    SDL_RenderCopy(p_sdl_renderer, mp_title, &src, &dst);
+    
     SDL_RenderPresent(p_sdl_renderer);
     return false;
 }

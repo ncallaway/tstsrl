@@ -2,6 +2,7 @@
 #define MAIN_MENU_STATE_H
 
 #include "SDL.h"
+#include "SDL_ttf.h"
 
 #include "State.h" // Required for subclass of State
 
@@ -20,6 +21,7 @@ public:
     MainMenuState(IStateChanger* state_changer, IRenderInfo* renderer);
 
     virtual void start();
+    virtual void stop();
     
     virtual bool event(SDL_Event* event);
     virtual bool capture();
@@ -30,9 +32,8 @@ private:
     IRenderInfo* mp_renderer; 
     IStateChanger* mp_state_changer;
 
-    bool m_going_up;
-    int m_previous_color_value;
-    int m_color_value;
+    TTF_Font* mp_selected_font;
+    SDL_Texture* mp_title;
 };
 
 #endif // MAIN_MENU_STATE_H

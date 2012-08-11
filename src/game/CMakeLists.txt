@@ -50,5 +50,5 @@ if (${TARGET_OS} MATCHES "windows")
         
 else (${TARGET_OS} MATCHES "windows")
     set_target_properties(${TARGET} PROPERTIES COMPILE_FLAGS "${SDL_CFLAGS}" LINK_FLAGS "${SDL_LFLAGS}")
-    target_link_libraries(${TARGET} SDL2 engine) 
+    target_link_libraries(${TARGET} SDL2 SDL2_ttf engine) 
 endif (${TARGET_OS} MATCHES "windows")

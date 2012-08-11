@@ -32,3 +32,4 @@ endif (${TARGET_OS} MATCHES "windows")
 
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(assets)

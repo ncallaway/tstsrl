@@ -6,6 +6,7 @@
   necessary application startup work.
 */
 #include "SDL.h"
+#include "SDL_ttf.h"
 
 #include "StateManager.h"
 #include "State.h"
@@ -32,6 +33,7 @@ int main( int argc, char* args[] )
 
     //Start SDL
     SDL_Init( SDL_INIT_EVERYTHING );
+    TTF_Init();
 
     p_window = SDL_CreateWindow("A window", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
     p_renderer = SDL_CreateRenderer(p_window, -1, 0);
@@ -42,6 +44,7 @@ int main( int argc, char* args[] )
     p_state_manager->register_state(MAIN_MENU_STATE, new MainMenuState(p_state_manager, renderer));
     p_state_manager->register_state(CONTROLLER_SELECT_STATE, new ControllerSelectState(p_state_manager, renderer)); 
     p_state_manager->register_state(GAME_STATE, new GameState(p_state_manager, renderer)); 
+
     p_state_manager->set_next_state(MAIN_MENU_STATE);
 
     LooperConfiguration configuration;
