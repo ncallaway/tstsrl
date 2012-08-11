@@ -18,6 +18,7 @@ void MainMenuState::start() {
     SDL_Color font_color = {155, 155, 255};
     SDL_Color bg_color = {255, 255, 255};
 
+    TTF_SetFontHinting(mp_selected_font, TTF_HINTING_LIGHT);
     SDL_Surface* tmp_surface = TTF_RenderUTF8_Shaded(mp_selected_font, "Twin-Stick Tactical-Shooter Rogue-Like", font_color, bg_color);
     SDL_Renderer* renderer = mp_renderer->get_sdl_renderer();
     mp_title = SDL_CreateTextureFromSurface(renderer, tmp_surface);
