@@ -63,9 +63,11 @@ if target_os == "windows"
     puts "Beginning windows build...\n"
     cmd 'vcvars32 x86 & cmake -G "NMake Makefiles" ..'
     cmd 'vcvars32 x86 & nmake'
+	
+	Dir.chdir "../bin/windows"
+	cmd 'engine_ut.exe'
     
     if run
-        Dir.chdir "../bin/windows"
         exec "#{target}.exe"
     end
 end

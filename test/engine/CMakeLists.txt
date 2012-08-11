@@ -12,6 +12,14 @@ include_directories(include
 target_link_libraries(engine_ut gmock gtest gtest_main engine)
 
 if (${TARGET_OS} MATCHES "windows")
+    foreach(flag_var
+        CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+        CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+        
+        if(${flag_var} MATCHES "/MD")
+            string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
+        endif(${flag_var} MATCHES "/MD")
+    endforeach(flag_var)
     target_link_libraries(engine_ut SDL)
 else (${TARGET_OS} MATCHES "windows")
     set_target_properties(engine_ut PROPERTIES
