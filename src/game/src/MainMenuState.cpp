@@ -8,6 +8,9 @@
 MainMenuState::MainMenuState(IStateChanger* state_changer, IRenderInfo* renderer) {
     mp_state_changer = state_changer;
     mp_renderer = renderer;
+
+    mp_selected_font = NULL;
+    mp_title = NULL; 
 }
 
 void MainMenuState::start() {
