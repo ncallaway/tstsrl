@@ -3,6 +3,7 @@ enable_testing()
 add_executable(engine_ut
     src/test_looper.cpp
     src/test_state_manager.cpp
+    src/test_command_queue.cpp
     )
 
 include_directories(include

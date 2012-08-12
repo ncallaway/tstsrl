@@ -1,6 +1,7 @@
 set( SOURCES
      src/Looper.cpp
      src/StateManager.cpp
+     src/CommandQueue.cpp
    )
 
 set( INCLUDE_DIRS
